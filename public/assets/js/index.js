@@ -82,7 +82,6 @@ var handleNoteDelete = function (event) {
 // Sets the activeNote and displays it
 var handleNoteView = function () {
   activeNote = $(this).data();
-  debugger;
   renderActiveNote();
 };
 
@@ -103,7 +102,12 @@ var handleRenderSaveBtn = function () {
 };
 
 // Render's the list of note titles
-var renderNoteList = function (notes) {
+
+// smh - These two lines do exactly the same thing, Am I seeing this correctly?
+// var renderActiveNote = function {
+// function renderNoteList(notes) {
+
+function renderNoteList(notes) {
   $noteList.empty();
 
   var noteListItems = [];
@@ -124,7 +128,7 @@ var renderNoteList = function (notes) {
   }
 
   $noteList.append(noteListItems);
-};
+}
 
 // Gets notes from the db and renders them to the sidebar
 var getAndRenderNotes = function () {

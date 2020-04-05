@@ -29,9 +29,15 @@ module.exports = function (app) {
   });
 
   app.delete("/api/notes/:id", function (req, res) {
-    data.splice(req.params.id, 1);
+    // Take out the note in the db.json object array
+    data.splice(req.params.id - 1, 1);
+    // Call to reset the IDs
     resetIds(data);
+    // console.log(path.join(__dirname, "../db/db.json", JSON.stringify(data)));
+    // Write out the db.json file.
     fs.writeFile(
+      //__dirname comes from "path"
+      // "../db/dbjson" means its 2 levels up and in the db folder called db.json
       path.join(__dirname, "../db/db.json"),
       JSON.stringify(data),
       function (err) {
@@ -48,9 +54,8 @@ module.exports = function (app) {
 };
 
 function resetIds(data) {
-  console.log(data);
+  // loop through each array and the id is the index number+1
   data.forEach((element, indexNum) => {
     element.id = indexNum + 1;
   });
-  console.log(data);
 }
